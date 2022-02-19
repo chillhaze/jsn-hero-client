@@ -10,6 +10,7 @@ import * as heroSelectors from '../../redux/heroes/heroes-selectors';
 import { setChosenHero } from 'redux/heroes/heroes-slice';
 import Button from 'components/Button/Button';
 import EditHeroModal from './EditHeroModal/EditHeroModal';
+import { BASE_DB_URL } from '../../constants/baseDbURL';
 import {
   Section,
   HeroWrapper,
@@ -87,9 +88,7 @@ export default function HeroInfo() {
           <InfoWrapper>
             <HeroAvatar>
               <img
-                src={
-                  images[0] ? `http://localhost:8080/${images[0]}` : noImageKid
-                }
+                src={images[0] ? `${BASE_DB_URL}${images[0]}` : noImageKid}
                 alt={`${nickname}`}
               />
             </HeroAvatar>
@@ -135,7 +134,7 @@ export default function HeroInfo() {
                 <TiDeleteOutline />
               </Button>
               <img
-                src={image ? `http://localhost:8080/${image}` : noImageKid}
+                src={image ? `${BASE_DB_URL}${image}` : noImageKid}
                 alt={image}
               />
             </ImageItem>

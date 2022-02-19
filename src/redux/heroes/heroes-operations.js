@@ -1,18 +1,19 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
+import { BASE_DB_URL } from '../../constants/baseDbURL';
 
-// axios.defaults.baseURL = 'https://bitmedia-lab.herokuapp.com/api';
-axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.baseURL = BASE_DB_URL;
+// axios.defaults.baseURL = 'http://localhost:8080/api';
 
 export const getHeroes = createAsyncThunk(
   'heroes/get-heroes',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.get(`/heroes/get-all-heroes`, {
+      const { data } = await axios.get(`api/heroes/get-all-heroes`, {
         params: { ...credentials },
       });
-
+      console.log(data.data);
       return data.data;
     } catch (error) {
       toast.error(error.response.data.message);
@@ -27,7 +28,7 @@ export const addNewHero = createAsyncThunk(
     console.log('credentials', credentials);
 
     try {
-      const { data } = await axios.post(`/heroes/create`, credentials, {
+      const { data } = await axios.post(`api/heroes/create`, credentials, {
         header: { 'content-type': 'multipart/form-data' },
       });
 
@@ -46,7 +47,7 @@ export const updateHero = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.put(
-        `/heroes/update-stats/${credentials.id}`,
+        `api/heroes/update-stats/${credentials.id}`,
         credentials.formData,
         {
           header: { 'content-type': 'multipart/form-data' },
@@ -68,7 +69,7 @@ export const removeImage = createAsyncThunk(
     console.log(credentials);
     try {
       const { data } = await axios.put(
-        `/heroes/remove-image/${credentials.heroId}`,
+        `api/heroes/remove-image/${credentials.heroId}`,
         credentials,
       );
 
@@ -87,7 +88,7 @@ export const deleteHero = createAsyncThunk(
     console.log(credentials);
     try {
       const { data } = await axios.delete(
-        `/heroes/delete-hero/${credentials.heroId}`,
+        `api/heroes/delete-hero/${credentials.heroId}`,
       );
 
       toast.error('Hero deleted!');

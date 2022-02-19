@@ -14,6 +14,7 @@ import {
   HeroName,
   PaginationElement,
 } from './HeroesList.styled';
+import { BASE_DB_URL } from '../../constants/baseDbURL';
 
 export default function HeroesList() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export default function HeroesList() {
                 <HeroAvatar
                   src={
                     hero.images[0]
-                      ? `http://localhost:8080/${hero.images[0]}`
+                      ? `${BASE_DB_URL}${hero.images[0]}`
                       : noImageKid
                   }
                 />

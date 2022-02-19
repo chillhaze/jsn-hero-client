@@ -78,12 +78,34 @@ export const PaginationElement = styled.div`
   justify-content: center;
   align-items: center;
 
-  & > ul {
-    display: flex;
+  & > nav {
+    & > ul {
+      & > li {
+        margin-right: ${props => props.theme.spacing(2)};
+        border-radius: 5px;
 
-    & > li {
-      width: 30px;
-      height: 30px;
+        & > button {
+          padding: ${props => props.theme.spacing(2)} 12px;
+          background-color: ${props => props.theme.colors.colorMain};
+          color: ${props => props.theme.colors.textColorMain};
+
+          border-radius: 5px;
+          border: 1px solid ${props => props.theme.colors.colorMain};
+
+          transition: transform 300ms linear;
+          transition: 150ms linear;
+          box-shadow: 1px 3px 10px -7px #050505;
+
+          &:hover {
+            background-color: ${props => props.theme.colors.colorMain};
+            transition: transform 300ms linear;
+
+            box-shadow: 0px 2px 17px -4px #313232;
+            border-radius: 5px;
+            transform: scale(1.05);
+          }
+        }
+      }
     }
   }
 `;
