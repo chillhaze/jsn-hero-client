@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Wrapper = styled.button`
+export const Btn = styled.button`
   color: ${props => props.theme.colors.textColorMain};
   background-color: ${props => props.theme.colors.bgColorMain};
   border: 1px solid ${props => props.theme.colors.bgColorSecondary};

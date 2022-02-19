@@ -1,6 +1,10 @@
 import React from 'react';
-import { Wrapper } from './Button.styled';
+import { Btn } from './Button.styled';
 
-export default function Button({ children, props }) {
-  return <Wrapper {...props}>{children}</Wrapper>;
+export default function Button({ children, props, onClick }) {
+  return (
+    <Btn onClick={onClick} {...props}>
+      {children}
+    </Btn>
+  );
 }

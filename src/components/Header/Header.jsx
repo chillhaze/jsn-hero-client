@@ -2,10 +2,17 @@ import React from 'react';
 import Container from 'components/Container/Container';
 import { Wrapper, HeaderNav, Logo, LinkTo } from './Header.styled';
 import { useLocation, Link } from 'react-router-dom';
+import { setChosenHero } from 'redux/heroes/heroes-slice';
+import { useDispatch } from 'react-redux';
 
 export default function Header() {
   const location = useLocation();
 
+  const dispatch = useDispatch();
+
+  const handleHomeLinkClick = () => {
+    dispatch(setChosenHero(null));
+  };
   return (
     <Wrapper>
       <Container>
@@ -15,12 +22,12 @@ export default function Header() {
           </Logo>
 
           {location.pathname !== '/' ? (
-            <LinkTo to="/">Home</LinkTo>
+            <LinkTo to="/" onClick={handleHomeLinkClick}>
+              Home
+            </LinkTo>
           ) : (
             <LinkTo to="/new-hero">Create new Hero</LinkTo>
           )}
-
-          {/* <Link href="/new-hero">Create new Hero</Link> */}
         </HeaderNav>
       </Container>
     </Wrapper>

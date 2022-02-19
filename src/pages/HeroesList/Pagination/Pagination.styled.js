@@ -20,7 +20,7 @@ export const NavItem = styled.li`
   margin-right: ${props => props.theme.spacing(2)};
   border-radius: 5px;
 
-  & button {
+  & > button {
     padding: ${props => props.theme.spacing(2)} 12px;
     border-radius: 5px;
     border: 1px solid ${props => props.theme.colors.colorMain};

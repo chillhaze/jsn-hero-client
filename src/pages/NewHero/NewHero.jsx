@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsImages } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import FormData from 'form-data';
+import * as heroesOperations from '../../redux/heroes/heroes-operations';
+import * as heroesSelectors from '../../redux/heroes/heroes-selectors';
 import {
   Section,
   Form,
@@ -10,12 +15,11 @@ import {
   InputWrapper,
   SubmitButton,
 } from './NewHero.styled';
-import FormData from 'form-data';
-
-import * as heroesOperations from '../../redux/heroes/heroes-operations';
 
 export default function NewHero() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const chosenHero = useSelector(heroesSelectors.getChosenHero);
 
   const [newHero, setNewHero] = useState({
     nickname: '',
@@ -33,19 +37,19 @@ export default function NewHero() {
 
     switch (name) {
       case 'nickName':
-        setNewHero({ ...newHero, nickname: value.trim() });
+        setNewHero({ ...newHero, nickname: value });
         break;
       case 'realName':
-        setNewHero({ ...newHero, real_name: value.trim() });
+        setNewHero({ ...newHero, real_name: value });
         break;
       case 'originDescription':
-        setNewHero({ ...newHero, origin_description: value.trim() });
+        setNewHero({ ...newHero, origin_description: value });
         break;
       case 'superpowers':
-        setNewHero({ ...newHero, superpowers: value.trim() });
+        setNewHero({ ...newHero, superpowers: value });
         break;
       case 'catchPhrase':
-        setNewHero({ ...newHero, catch_phrase: value.trim() });
+        setNewHero({ ...newHero, catch_phrase: value });
         break;
 
       default:
@@ -57,17 +61,21 @@ export default function NewHero() {
     e.preventDefault();
 
     let formData = new FormData();
-    formData.append('nickname', newHero.nickname);
-    formData.append('real_name', newHero.real_name);
-    formData.append('origin_description', newHero.origin_description);
-    formData.append('superpowers', newHero.superpowers);
-    formData.append('catch_phrase', newHero.catch_phrase);
-    heroImages.forEach(image => formData.append('images', image));
+    formData.append('nickname', newHero.nickname.trim());
+    formData.append('real_name', newHero.real_name.trim());
+    formData.append('origin_description', newHero.origin_description.trim());
+    formData.append('superpowers', newHero.superpowers.trim());
+    formData.append('catch_phrase', newHero.catch_phrase.trim());
+    heroImages.reverse().forEach(image => formData.append('images', image));
 
     dispatch(heroesOperations.addNewHero(formData));
-
-    e.traget.form.reset();
   };
+
+  useEffect(() => {
+    if (chosenHero) {
+      navigate('/hero-info');
+    }
+  }, [chosenHero, navigate]);
 
   const fileUploadHandler = e => {
     const images = e.target.files;

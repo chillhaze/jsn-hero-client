@@ -38,7 +38,18 @@ export const heroesSlice = createSlice({
       state.heroesData = [];
       state.isLoadingHeroesData = false;
     },
-    //------------------ Update Transactions Data
+    //------------------ Add New Hero
+    [heroesOperations.addNewHero.pending](state, _) {
+      state.isLoadingHeroesData = true;
+    },
+    [heroesOperations.addNewHero.fulfilled](state, action) {
+      state.chosenHero = action.payload.result;
+      state.isLoadingHeroesData = false;
+    },
+    [heroesOperations.addNewHero.rejected](state, action) {
+      state.isLoadingHeroesData = false;
+    },
+    //------------------ Update Heroes Data
     [heroesOperations.updateHero.pending](state, _) {
       state.isLoadingHeroesData = true;
     },
@@ -49,13 +60,29 @@ export const heroesSlice = createSlice({
     [heroesOperations.updateHero.rejected](state, action) {
       state.isLoadingHeroesData = false;
     },
+    //------------------ Remove Heroes Image
+    [heroesOperations.removeImage.pending](state, _) {
+      state.isLoadingHeroesData = true;
+    },
+    [heroesOperations.removeImage.fulfilled](state, action) {
+      state.chosenHero = action.payload.result;
+      state.isLoadingHeroesData = false;
+    },
+    [heroesOperations.removeImage.rejected](state, action) {
+      state.isLoadingHeroesData = false;
+    },
+    //------------------ Delete Hero
+    [heroesOperations.deleteHero.pending](state, _) {
+      state.isLoadingHeroesData = true;
+    },
+    [heroesOperations.deleteHero.fulfilled](state, action) {
+      state.isLoadingHeroesData = false;
+    },
+    [heroesOperations.deleteHero.rejected](state, action) {
+      state.isLoadingHeroesData = false;
+    },
   },
 });
 
-export const {
-  // setFilterOption,
-  // setSearchQuery,
-  setPageOption,
-  setLimitOption,
-  setChosenHero,
-} = heroesSlice.actions;
+export const { setPageOption, setLimitOption, setChosenHero } =
+  heroesSlice.actions;

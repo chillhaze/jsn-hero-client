@@ -3,6 +3,11 @@ import styled from '@emotion/styled';
 export const Section = styled.section`
   margin-top: ${props => props.theme.spacing(40)};
   margin-bottom: ${props => props.theme.spacing(20)};
+
+  @media (max-width: 850px) {
+    margin-top: ${props => props.theme.spacing(10)};
+    margin-bottom: ${props => props.theme.spacing(10)};
+  }
 `;
 
 export const List = styled.ul`
@@ -14,15 +19,17 @@ export const List = styled.ul`
     margin-right: 0px;
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 850px) {
     flex-wrap: wrap;
   }
 `;
 
 export const ListItem = styled.li`
-  width: 185px;
+  min-width: 185px;
+  max-width: 185px;
   height: 277px;
   margin-right: ${props => props.theme.spacing(3)};
+  margin-bottom: ${props => props.theme.spacing(3)};
   padding: ${props => props.theme.spacing(1)};
 
   background-color: ${props => props.theme.colors.bgColorMain};
@@ -35,6 +42,9 @@ export const ListItem = styled.li`
   @media (max-width: 750px) {
     flex-direction: column;
     margin-bottom: ${props => props.theme.spacing(3)};
+
+    min-width: 165px;
+    max-width: 165px;
   }
 
   &:hover,
@@ -60,4 +70,20 @@ export const HeroName = styled.p`
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const PaginationElement = styled.div`
+  margin-top: ${props => props.theme.spacing(10)};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > ul {
+    display: flex;
+
+    & > li {
+      width: 30px;
+      height: 30px;
+    }
+  }
 `;

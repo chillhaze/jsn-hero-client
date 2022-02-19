@@ -1,3 +1,8 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { BsImages } from 'react-icons/bs';
+import * as heroesOperations from '../../../redux/heroes/heroes-operations';
+import { Overlay } from './EditHeroModal.styled';
 import {
   Form,
   Input,
@@ -5,13 +10,7 @@ import {
   Label,
   LabelText,
   SubmitButton,
-} from 'pages/NewHero/NewHero.styled';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import { Overlay } from './EditHeroModal.styled';
-import * as heroesOperations from '../../../redux/heroes/heroes-operations';
-import { BsImages } from 'react-icons/bs';
+} from './EditHeroModal.styled';
 
 export default function EditHeroModal({ onClose, chosenHero }) {
   const [updatedHeroStats, setUpdatedHeroStats] = useState({
@@ -58,7 +57,7 @@ export default function EditHeroModal({ onClose, chosenHero }) {
   const fileUploadHandler = e => {
     const images = e.target.files;
     const values = Object.values(images);
-    setUpdatedHeroImages([...updatedHeroStats.images, ...values]);
+    updatedHeroImages.push(...values);
   };
 
   const handleOnSubmit = e => {
@@ -73,23 +72,19 @@ export default function EditHeroModal({ onClose, chosenHero }) {
     );
     formData.append('superpowers', updatedHeroStats.superpowers.trim());
     formData.append('catch_phrase', updatedHeroStats.catch_phrase.trim());
-    // updatedHeroStats.images.forEach(image => formData.append('images', image));
-    updatedHeroImages.forEach(image => formData.append('images', image));
+    updatedHeroImages
+      .reverse()
+      .forEach(image => formData.append('images', image));
+    updatedHeroStats.images.forEach(image =>
+      formData.append('old_images', image),
+    );
+
+    console.log('formData', formData.getAll('old_images'));
 
     dispatch(heroesOperations.updateHero({ formData, id: chosenHero._id }));
 
-    // dispatch(heroesOperations.getHero(updatedHeroStats._id));
-
-    // Reseting form
-    formReset();
-
     // Closing modal
     onClose();
-  };
-
-  // Reset form fn
-  const formReset = () => {
-    setUpdatedHeroStats({});
   };
 
   // Listeners
@@ -116,6 +111,7 @@ export default function EditHeroModal({ onClose, chosenHero }) {
       onClose();
     }
   };
+
   return (
     <Overlay onClick={handleBackdropClick}>
       <Form onSubmit={handleOnSubmit}>

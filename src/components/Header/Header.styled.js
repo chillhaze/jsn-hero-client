@@ -20,12 +20,12 @@ export const Logo = styled.div`
     padding: ${props => props.theme.spacing(2)} 0;
   }
 
-  & a {
+  & > a {
     font-size: 32px;
     line-height: 38px;
     font-weight: 500;
 
-    &a :focus-visible {
+    & > a :focus-visible {
       outline-offset: ${props => props.theme.spacing(2)};
       outline-style: solid;
       outline: 1px solid ${props => props.theme.colors.colorSecondary};
@@ -33,7 +33,7 @@ export const Logo = styled.div`
     }
 
     @media (max-width: 750px) {
-      font-size: 26px;
+      font-size: 20px;
       line-height: 32px;
     }
   }
@@ -66,5 +66,8 @@ export const LinkTo = styled(Link)`
   }
 
   @media (max-width: 750px) {
+    padding: 4px ${props => props.theme.spacing(2)};
+
+    font-size: 12px;
   }
 `;

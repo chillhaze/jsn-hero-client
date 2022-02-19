@@ -1,22 +1,24 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Wrapper, NavItems, NavItem, Button } from './Pagination.styled';
-// import * as transactionsSelectors from '../../redux/transactions/transactions-selectors';
+import * as heroesSelectors from '../../../redux/heroes/heroes-selectors';
+import { PAGE_LIMIT } from '../../../constants/pageItemsLimit';
 
-export default function Pagination({
-  isMobile,
-  currentPage,
-  pageItemsLimit,
-  handleCurrentPageChange,
-}) {
-  // const handleChangePage = (_, num) => {
-  //   // dispatch(setPageOption(num));
-  //   handleCurrentPageChange(num);
-  // };
+export default function Pagination({ currentPage, handleCurrentPageChange }) {
+  const count = useSelector(heroesSelectors.getHeroesCount);
 
-  // const totalCount = Math.ceil(
-  //   useSelector(transactionsSelectors.getTransactionsCount) / pageItemsLimit,
-  // );
+  const indexOfLastPost = currentPage * PAGE_LIMIT;
+  const indexOfFirstPost = indexOfLastPost - PAGE_LIMIT;
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(count / PAGE_LIMIT); i++) {
+    pageNumbers.push(i);
+  }
+
+  const handleChange = number => {
+    console.log(number);
+    handleCurrentPageChange(number);
+  };
 
   return (
     <Wrapper>
@@ -25,21 +27,13 @@ export default function Pagination({
           <Button>{'<'}</Button>
         </NavItem>
 
-        <NavItem>
-          <Button>1</Button>
-        </NavItem>
-        <NavItem>
-          <Button>2</Button>
-        </NavItem>
-        <NavItem>
-          <Button>3</Button>
-        </NavItem>
-        <NavItem>
-          <Button>4</Button>
-        </NavItem>
-        <NavItem>
-          <Button>5</Button>
-        </NavItem>
+        {pageNumbers.map((number, index) => {
+          return (
+            <NavItem key={number}>
+              <button onClick={number => handleChange(number)}>{number}</button>
+            </NavItem>
+          );
+        })}
 
         <NavItem>
           <Button>{'>'}</Button>
@@ -48,19 +42,3 @@ export default function Pagination({
     </Wrapper>
   );
 }
-
-// <Wrapper>
-//   {/* <Stack spacing={2}>
-//     <PaginationStyled
-//       size={isMobile ? 'small' : 'large'}
-//       // size={'large'}
-//       count={totalCount}
-//       variant="outlined"
-//       shape="rounded"
-//       defaultPage={1}
-//       onChange={handleChangePage}
-//       page={currentPage}
-//       color={currentPage ? 'primary' : 'secondary'}
-//     />
-//   </Stack> */}
-// </Wrapper>;
