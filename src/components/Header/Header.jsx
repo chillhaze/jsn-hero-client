@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from 'components/Container/Container';
 import { Wrapper, HeaderNav, Logo, LinkTo } from './Header.styled';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { setChosenHero } from 'redux/heroes/heroes-slice';
 import { useDispatch } from 'react-redux';
 

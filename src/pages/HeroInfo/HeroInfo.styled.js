@@ -29,6 +29,8 @@ export const HeroWrapper = styled.div`
     padding: 0;
     margin: 0;
 
+    /* color: ${props => props.theme.colors.red}; */
+
     background-color: transparent;
     border: none;
 
@@ -51,9 +53,18 @@ export const HeroWrapper = styled.div`
 
       &:hover {
         fill: ${props => props.theme.colors.red};
-        transition: 200ms linear;
         border: 1px solid ${props => props.theme.colors.red};
+        transition: 200ms linear;
       }
+    }
+
+    & > span {
+      position: absolute;
+      top: 5px;
+      right: -75px;
+      z-index: 10;
+
+      /* background-color: ${props => props.theme.colors.bgColorSecondary}; */
     }
   }
 

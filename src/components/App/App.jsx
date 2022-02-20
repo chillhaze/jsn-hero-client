@@ -5,6 +5,8 @@ import Loader from 'components/Loader/Loader';
 import Header from '../Header/Header';
 import Container from 'components/Container/Container';
 import { Main } from './App.styled';
+import { useSelector } from 'react-redux';
+import { getChosenHero } from 'redux/heroes/heroes-selectors';
 
 // Lazy load
 const HeroesList = lazy(() => import('pages/HeroesList/HeroesList'));
@@ -12,6 +14,7 @@ const HeroInfo = lazy(() => import('pages/HeroInfo/HeroInfo'));
 const NewHero = lazy(() => import('pages/NewHero/NewHero'));
 
 export default function App() {
+  const chosenHero = useSelector(getChosenHero);
   return (
     <>
       <Toaster
@@ -56,7 +59,11 @@ export default function App() {
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" exact element={<HeroesList />} />
-              <Route path="/hero-info" exact element={<HeroInfo />} />
+
+              {chosenHero && (
+                <Route path="/hero-info" exact element={<HeroInfo />} />
+              )}
+
               <Route path="/new-hero" exact element={<NewHero />} />
 
               {/* any route below*/}

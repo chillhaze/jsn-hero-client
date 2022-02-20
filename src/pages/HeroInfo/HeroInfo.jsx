@@ -72,6 +72,7 @@ export default function HeroInfo() {
       {chosenHero && images && (
         <HeroWrapper>
           <Button onClick={() => handleRemoveHero(heroId)}>
+            <span className="delete">Delete hero</span>
             <TiDeleteOutline />
           </Button>
 
