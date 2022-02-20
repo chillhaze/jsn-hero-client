@@ -3,11 +3,16 @@ import Button from 'components/Button/Button';
 
 export const Section = styled.section`
   margin-top: ${props => props.theme.spacing(30)};
-  margin-bottom: ${props => props.theme.spacing(18)};
+  margin-bottom: ${props => props.theme.spacing(20)};
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 850px) {
+    margin-top: ${props => props.theme.spacing(15)};
+    margin-bottom: ${props => props.theme.spacing(10)};
+  }
 `;
 
 export const Form = styled.form`

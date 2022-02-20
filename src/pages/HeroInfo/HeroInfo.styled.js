@@ -5,6 +5,11 @@ export const Section = styled.section`
   margin-bottom: ${props => props.theme.spacing(20)};
   padding-left: ${props => props.theme.spacing(20)};
   padding-right: ${props => props.theme.spacing(20)};
+
+  @media (max-width: 850px) {
+    padding-left: ${props => props.theme.spacing(4)};
+    padding-right: ${props => props.theme.spacing(4)};
+  }
 `;
 
 export const HeroWrapper = styled.div`
@@ -33,6 +38,10 @@ export const HeroWrapper = styled.div`
 
     background-color: transparent;
     border: none;
+
+    @media (max-width: 850px) {
+      display: block;
+    }
 
     &:hover {
       background-color: transparent;
@@ -63,6 +72,11 @@ export const HeroWrapper = styled.div`
       top: 5px;
       right: -75px;
       z-index: 10;
+
+      @media (max-width: 850px) {
+        top: -20px;
+        right: 26px;
+      }
 
       /* background-color: ${props => props.theme.colors.bgColorSecondary}; */
     }
@@ -176,14 +190,17 @@ export const Phrase = styled.p``;
 export const HeroImages = styled.ul`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+
+  gap: 16px;
 `;
 
 export const ImageItem = styled.li`
   width: 185px;
   height: 277px;
-  margin-right: ${props => props.theme.spacing(3)};
-  margin-bottom: ${props => props.theme.spacing(3)};
+  /* margin-right: ${props => props.theme.spacing(3)}; */
+  /* margin-bottom: ${props => props.theme.spacing(3)}; */
   padding: ${props => props.theme.spacing(1)};
 
   position: relative;
@@ -197,7 +214,7 @@ export const ImageItem = styled.li`
 
   @media (max-width: 750px) {
     flex-direction: column;
-    margin-bottom: ${props => props.theme.spacing(3)};
+    /* margin-bottom: ${props => props.theme.spacing(3)}; */
   }
 
   &:hover,
@@ -223,6 +240,10 @@ export const ImageItem = styled.li`
 
     background-color: transparent;
     border: none;
+
+    @media (max-width: 850px) {
+      display: block;
+    }
 
     &:hover {
       background-color: transparent;

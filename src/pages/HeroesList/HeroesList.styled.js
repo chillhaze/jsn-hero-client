@@ -3,10 +3,14 @@ import styled from '@emotion/styled';
 export const Section = styled.section`
   margin-top: ${props => props.theme.spacing(40)};
   margin-bottom: ${props => props.theme.spacing(20)};
+  padding-left: ${props => props.theme.spacing(20)};
+  padding-right: ${props => props.theme.spacing(20)};
 
   @media (max-width: 850px) {
     margin-top: ${props => props.theme.spacing(10)};
     margin-bottom: ${props => props.theme.spacing(10)};
+    padding-left: ${props => props.theme.spacing(4)};
+    padding-right: ${props => props.theme.spacing(4)};
   }
 `;
 
@@ -14,10 +18,11 @@ export const List = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 16px;
 
-  & li:nth-last-of-type(1) {
+  /* & li:nth-last-of-type(1) {
     margin-right: 0px;
-  }
+  } */
 
   @media (max-width: 850px) {
     flex-wrap: wrap;
@@ -28,8 +33,8 @@ export const ListItem = styled.li`
   min-width: 185px;
   max-width: 185px;
   height: 277px;
-  margin-right: ${props => props.theme.spacing(3)};
-  margin-bottom: ${props => props.theme.spacing(3)};
+  /* margin-right: ${props => props.theme.spacing(3)}; */
+  /* margin-bottom: ${props => props.theme.spacing(3)}; */
   padding: ${props => props.theme.spacing(1)};
 
   background-color: ${props => props.theme.colors.bgColorMain};
@@ -41,7 +46,7 @@ export const ListItem = styled.li`
 
   @media (max-width: 750px) {
     flex-direction: column;
-    margin-bottom: ${props => props.theme.spacing(3)};
+    /* margin-bottom: ${props => props.theme.spacing(3)}; */
 
     min-width: 165px;
     max-width: 165px;
